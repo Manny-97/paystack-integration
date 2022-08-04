@@ -14,4 +14,4 @@ def initiate_payment(request):
     else:
         payment_form = forms.PaymentForm()
 
-    return render(request, 'initiate_payment', {'payment_form': payment_form})
+    return render(request, 'initiate_payment.html', {'payment_form': payment_form})
