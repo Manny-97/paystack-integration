@@ -15,12 +15,11 @@ class PayStack:
             "Content-Type": "application/json"
         }
         url = "{}{}".format(self.base_url, path)
-        # url = self.base_url + path
+       
         response = requests.get(url, headers=headers)
-        # breakpoint()
         if response.status_code == 200:
             response_data = response.json()
-            # breakpoint()
+
             return response_data["status"], response_data["data"]
 
         
