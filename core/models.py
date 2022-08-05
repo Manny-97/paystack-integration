@@ -33,4 +33,8 @@ class Payment(models.Model):
         status, result = paystack.verify_payment(self.ref, self.amount)
         if status:
             if result['amount']/100 == self.amount:
-                
+                self.verified = True
+            self.save()
+        if self.verified:
+            return True
+        return False
