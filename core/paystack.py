@@ -12,7 +12,7 @@ class PayStack:
         #Request Headers
         headers = {
             "Authorization": f"Bearer {self.PAYSTACK_SECRET_KEY}",
-            "content-type": "application/json"
+            "Content-Type": "application/json"
         }
         url = self.base_url + path
         response = requests.get(url=url, headers=headers)
