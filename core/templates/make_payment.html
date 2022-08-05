@@ -4,12 +4,11 @@
 <div class="container">
     <div class="d-flex row justify-content-center align-items-center py-md-5 py py-3" style="min-height: 90vh;">
         <div class="col-12">
-            <h5>Make Payment For: NGN {{payment.ammount}}</h5>
+            <h5>Make Payment For: NGN {{payment.amount}}</h5>
             <hr>
-            <form>
-                <script src="https://js.paystack.co/v1/inline.js"></script>
-                <button class="btn btn-large btn-success" onclick="payWithPayStack()" id="django-paystack-button">Make Payment</button> 
-            </form>
+            <script src="https://js.paystack.co/v1/inline.js"></script>
+            <button class="btn btn-large btn-success" onclick="payWithPayStack()" id="django-paystack-button">Make 
+                Payment</button> 
         </div>
     </div>
 </div>
@@ -21,7 +20,7 @@
         let obj = {
             key: '{{paystack_public_key}}',
             email: '{{payment.email}}',
-            amount: '{{payment.amount_value}}',
+            amount: '{{payment.amount}}',
             ref: ref,
             callback: function(response) {
                 window.location.href = "{% url 'verify-payment' payment.ref %}";
@@ -33,7 +32,7 @@
         if (Boolean(plan)) {
             obj.plan = plan;
         }
-        var handle = PaystackPop.setup(obj);
+        var handler = PaystackPop.setup(obj);
         handler.openIframe();
     }
 </script>
