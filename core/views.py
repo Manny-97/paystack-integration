@@ -23,13 +23,21 @@ def initiate_payment(request):
 
 
 def verify_payment(request, ref):
+    trxref = request.GET["trxref"]
+    if trxref != ref:
+        messages.error(request, 'The transaction reference passed was different from the actual reference. Please do not modify data during transactions')
     payment = get_object_or_404(Payment, ref=ref)
-    verified = payment.verify_payment()
-    if verified:
-        messages.success(request, 'Verification Successful')
+    
+    if payment.verify_payment():
+         messages.success(
+            request, f"Payment Completed Successfully, NGN {payment.amount}."
+        )
+        # messages.success(
+        #     request, f"Your new credit balance is NGN {payment.user.credit}."
+        # )
     else:
-        messages.error(request, 'Verification Failed')
-    return redirect('initiate-payment')
+        messages.warning(request, "Sorry, your payment could not be confirmed.")
+    return redirect("initiate-payment")
 
 
 # def verify(request, ref):
