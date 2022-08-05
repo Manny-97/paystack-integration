@@ -35,7 +35,7 @@ class Payment(models.Model):
 
     def verify_payment(self):
         paystack = PayStack()
-        breakpoint()
+        # breakpoint()
         status, result = paystack.verify_payment(self.ref, self.amount)
         if status:
             self.paystack_response = result

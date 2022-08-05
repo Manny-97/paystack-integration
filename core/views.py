@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from . import forms
-from pypaystack import Transaction, Customer, Plan
+# from pypaystack import Transaction, Customer, Plan
 from django.http import JsonResponse, HttpResponse
 from django.conf import settings
 from .models import Payment
@@ -32,12 +32,12 @@ def verify_payment(request, ref):
     return redirect('initiate-payment')
 
 
-def verify(request, ref):
-    transaction = Transaction(authorization_key=settings.PAYSTACK_SECRET_KEY)
-    response = transaction.verify(ref)
-    data = JsonResponse(response, safe=False)
-    if data.status_code == 200:
-        messages.success(request, 'Verification Successful')
-    else:
-        messages.error(request, 'Verification Failed')
-    return redirect('initiate-payment')
+# def verify(request, ref):
+#     transaction = Transaction(authorization_key=settings.PAYSTACK_SECRET_KEY)
+#     response = transaction.verify(ref)
+#     data = JsonResponse(response, safe=False)
+#     if data.status_code == 200:
+#         messages.success(request, 'Verification Successful')
+#     else:
+#         messages.error(request, 'Verification Failed')
+#     return redirect('initiate-payment')
