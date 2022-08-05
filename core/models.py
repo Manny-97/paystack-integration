@@ -5,6 +5,8 @@ from .paystack import PayStack
 
 
 class Payment(models.Model):
+    # full_name = models.CharField(max_length=40)
+    # last_name = models.TextField(max_length=250)
     amount = models.PositiveIntegerField()
     ref = models.CharField(max_length=200)
     email = models.EmailField()
@@ -27,7 +29,7 @@ class Payment(models.Model):
         super().save(*args, **kwargs)
 
     def amount_save(self):
-        return self.amount 
+        return self.amount * 100
 
     def verify_payment(self):
         paystack = PayStack()

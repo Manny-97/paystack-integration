@@ -1,4 +1,3 @@
-from urllib import response
 from django.conf import settings
 import pprint
 import requests
@@ -21,8 +20,8 @@ class PayStack:
         if response.status_code == 200:
             response_data = response.json()
             # breakpoint()
-            return response.status_code
+            return response_data["status"], response_data["data"]
 
         
-        # response_data = response.json()
-        return response.status_code
+        response_data = response.json()
+        return response_data["status"], response_data["message"]
