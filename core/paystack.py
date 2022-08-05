@@ -16,7 +16,7 @@ class PayStack:
         }
         url = "{}{}".format(self.base_url, path)
         # url = self.base_url + path
-        response = requests.get(path, headers=headers)
+        response = requests.get(url, headers=headers)
         # breakpoint()
         if response.status_code == 200:
             response_data = response.json()
