@@ -29,7 +29,7 @@ class Payment(models.Model):
         return self.amount * 100
 
     def verify_payment(self):
-        paystack = Paystack()
+        paystack = PayStack()
         status, result = paystack.verify_payment(self.ref, self.amount)
         if status:
             if result['amount']/100 == self.amount:
