@@ -1,3 +1,4 @@
-#### PAYSTACK PAYMENT
+# PAYSTACK PAYMENT
 
-## Link to the site: https://paystack-integration.herokuapp.com/
+#### Link to the site: 
+                        https://paystack-integration.herokuapp.com/
