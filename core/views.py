@@ -1,9 +1,10 @@
-from django.shortcuts import get_object_or_404, redirect, render
-from . import forms
-from django.http import JsonResponse, HttpResponse
 from django.conf import settings
-from .models import Payment
 from django.contrib import messages
+from django.shortcuts import get_object_or_404, redirect, render
+
+from . import forms
+from .models import Payment
+
 # Create your views here.
 
 
@@ -18,7 +19,7 @@ def initiate_payment(request):
     else:
         payment_form = forms.PaymentForm()
 
-    return render(request, 'initiate_payment.html', {'payment_form': payment_form,},)
+    return render(request, 'initiate_payment.html', {'payment_form': payment_form})
 
 
 def verify_payment(request, ref):
@@ -26,9 +27,8 @@ def verify_payment(request, ref):
     if trxref != ref:
         messages.error(request, 'The transaction reference passed was different from the actual reference. Please do not modify data during transactions')
     payment = get_object_or_404(Payment, ref=ref)
-    
     if payment.verify_payment():
-         messages.success(
+        messages.success(
             request, f"Payment Completed Successfully, NGN {payment.amount}."
         )
         # messages.success(
@@ -37,5 +37,3 @@ def verify_payment(request, ref):
     else:
         messages.warning(request, "Sorry, your payment could not be confirmed.")
     return redirect("initiate-payment")
-
-

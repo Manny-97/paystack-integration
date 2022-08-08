@@ -1,7 +1,9 @@
-from django.db import models
-from django.urls import reverse
 import secrets
+
+from django.db import models
+
 from .paystack import PayStack
+
 # Create your models here.
 
 
@@ -42,6 +44,5 @@ class Payment(models.Model):
             if result['amount']/100 == self.amount:
                 self.completed = True
             self.save()
-        
             return True
         return False
